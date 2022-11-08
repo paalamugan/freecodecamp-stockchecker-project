@@ -7,14 +7,11 @@ const cors        = require('cors');
 const apiRoutes         = require('./routes/api.js');
 const fccTestingRoutes  = require('./routes/fcctesting.js');
 const runner            = require('./test-runner');
+const helmet            = require("helmet");
 
 const app = express();
 
-app.use((req, res, next) => {
-  res.header("Content-Security-Policy", "default-src 'self'; script-src 'self'; style-src 'self'");
-  res.header("Content-Security-Policy", "default-src 'self' http: https: data: blob: 'unsafe-inline' 'unsafe-eval';");
-  next();
-});
+app.use(helmet());
 
 app.use('/public', express.static(process.cwd() + '/public'));
 
