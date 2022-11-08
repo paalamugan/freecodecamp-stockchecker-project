@@ -11,7 +11,18 @@ const helmet            = require("helmet");
 
 const app = express();
 
-app.use(helmet());
+app.use(helmet({
+  contentSecurityPolicy: {
+    useDefaults: false,
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'"],
+      objectSrc: ["'none'"],
+      styleSrc: ["'self'", "https:", "'unsafe-inline';"],
+      upgradeInsecureRequests: true,
+    },
+  }
+}));
 
 app.use('/public', express.static(process.cwd() + '/public'));
 
