@@ -45,16 +45,10 @@ module.exports = function (app) {
   app.set("trust proxy", 1);
 
   app
-    .use((req, res, next) => {
-      res.header("Content-Security-Policy", "default-src 'self'; script-src 'self'; style-src 'self'");
-      res.header("Content-Security-Policy", "default-src 'self' http: https: data: blob: 'unsafe-inline' 'unsafe-eval';");
-      next();
-    })
     .route("/api/stock-prices")
     .get(async function (req, res) {
       const { stock, like } = req.query;
       const { ip } = req;
-      console.log("🚀 ~ file: api.js ~ line 9 ~ ip", ip);
       const isSingle = typeof stock === "string";
       const stocks = isSingle ? [stock] : stock;
       const likeValue = like === "true";
