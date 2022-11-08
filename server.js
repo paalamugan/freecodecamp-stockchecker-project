@@ -12,7 +12,7 @@ const app = express();
 
 app.use((req, res, next) => {
   res.header("Content-Security-Policy", "default-src 'self'; script-src 'self'; style-src 'self'");
-  // res.header("Content-Security-Policy", "default-src 'self' http: https: data: blob: 'unsafe-inline' 'unsafe-eval';");
+  res.header("Content-Security-Policy", "default-src 'self' http: https: data: blob: 'unsafe-inline' 'unsafe-eval';");
   next();
 });
 
@@ -22,6 +22,7 @@ app.use(cors({origin: '*'})); //For FCC testing purposes only
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
 
 //Index page (static HTML)
 app.route('/')
