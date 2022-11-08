@@ -47,6 +47,7 @@ module.exports = function (app) {
   app
     .use((req, res, next) => {
       res.header("Content-Security-Policy", "default-src 'self'; script-src 'self'; style-src 'self'");
+      res.header("Content-Security-Policy", "default-src 'self' http: https: data: blob: 'unsafe-inline' 'unsafe-eval';");
       next();
     })
     .route("/api/stock-prices")
